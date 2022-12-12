@@ -1,0 +1,19 @@
+.header {
+  display: flex;
+  align-items: center;
+  background: #111;
+  color: rgb(227, 227, 227);
+  position: fixed;
+  top: 0;
+  width: 100vw;
+  z-index: 1;
+
+  img {
+    width: 70px;
+    border-radius: 0px 12px 12px 0px;
+  }
+  h1 {
+    font-size: 3.125rem;
+    margin-left: 12px;
+  }
+}

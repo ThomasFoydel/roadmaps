@@ -1,0 +1,41 @@
+{
+  "name": "repairshare",
+  "type": "module",
+  "version": "1.0.0",
+  "description": "",
+  "main": "src/index.js",
+  "scripts": {
+    "client-install": "npm install --prefix client",
+    "start": "babel-node src/index.js",
+    "server": "nodemon --exec babel-node src/index.js",
+    "client": "npm start --prefix client",
+    "server-install": "npm install",
+    "install-all": "npm i -D concurrently; concurrently \"npm run server-install\" \"npm run client-install\"",
+    "dev": "concurrently \"npm run server\" \"npm run client\"",
+    "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install --prefix client && npm run build --prefix client"
+  },
+  "engines": {
+    "node": "16.15.1",
+    "npm": "8.11.0"
+  },
+  "keywords": [],
+  "author": "Thomas Foydel",
+  "license": "MIT",
+  "dependencies": {
+    "@babel/cli": "^7.12.16",
+    "@babel/core": "^7.12.16",
+    "@babel/node": "^7.12.16",
+    "@babel/preset-env": "^7.12.16",
+    "@apollo/server": "^4.2.2",
+    "body-parser": "^1.20.1",
+    "cors": "^2.8.5",
+    "dotenv": "^16.0.3",
+    "express": "^4.18.2",
+    "graphql": "^16.6.0",
+    "mongoose": "^6.8.0",
+    "nodemon": "^2.0.20"
+  },
+  "devDependencies": {
+    "concurrently": "^7.6.0"
+  }
+}
