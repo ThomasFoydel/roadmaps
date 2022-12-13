@@ -5,7 +5,6 @@ import dotenv from 'dotenv'
 import express from 'express'
 import mongoose from 'mongoose'
 import { fileURLToPath } from 'url'
-import bodyParser from 'body-parser'
 import { ApolloServer } from '@apollo/server'
 import { expressMiddleware } from '@apollo/server/express4'
 import { ApolloServerPluginDrainHttpServer } from '@apollo/server/plugin/drainHttpServer'
@@ -15,7 +14,7 @@ import { typeDefs } from './graphql/TypeDefs.js'
 dotenv.config()
 const port = process.env.PORT || 8000
 const app = express()
-app.use(cors(), bodyParser.json())
+app.use(cors(), express.urlencoded({ extended: true }), express.json())
 
 const httpServer = http.createServer(app)
 const server = new ApolloServer({
