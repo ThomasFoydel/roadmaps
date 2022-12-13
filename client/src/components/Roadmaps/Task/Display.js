@@ -1,27 +1,10 @@
 import { Tooltip } from 'react-tooltip'
-import {
-  faCheckSquare,
-  faMinusCircle,
-  faPencil,
-  faShare,
-  faSquare,
-  faTimes
-} from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faCheckSquare, faSquare } from '@fortawesome/free-solid-svg-icons'
+import EditableTitle from '../EditableTitle'
 
 const Display = ({
-  props: {
-    _id,
-    done,
-    title,
-    editOpen,
-    titleEdit,
-    toggleDone,
-    setEditOpen,
-    setTitleEdit,
-    handleDelete,
-    handleEditSubmit
-  }
+  props: { _id, done, title, toggleDone, handleDelete, handleSubmitEdit }
 }) => (
   <div className='task'>
     <button id={`check-box-${_id}`} onClick={toggleDone}>
@@ -31,7 +14,16 @@ const Display = ({
       />
     </button>
     <Tooltip anchorId={`check-box-${_id}`} content='Toggle task complete' />
-    {editOpen ? (
+    <EditableTitle
+      props={{
+        _id,
+        type: 'task',
+        title,
+        handleDelete,
+        handleSubmitEdit
+      }}
+    />
+    {/* {editOpen ? (
       <form className='edit-form' onSubmit={handleEditSubmit}>
         <input
           maxLength='25'
@@ -67,7 +59,7 @@ const Display = ({
           <Tooltip anchorId={`edit-task-${_id}`} content='Edit task' />
         </div>
       </div>
-    )}
+    )} */}
   </div>
 )
 

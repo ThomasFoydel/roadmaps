@@ -22,11 +22,11 @@
   "author": "Thomas Foydel",
   "license": "MIT",
   "dependencies": {
+    "@apollo/server": "^4.2.2",
     "@babel/cli": "^7.12.16",
     "@babel/core": "^7.12.16",
     "@babel/node": "^7.12.16",
     "@babel/preset-env": "^7.12.16",
-    "@apollo/server": "^4.2.2",
     "body-parser": "^1.20.1",
     "cors": "^2.8.5",
     "dotenv": "^16.0.3",

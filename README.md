@@ -38,7 +38,7 @@ Once I had the database and server architecture finished I was off to the races.
 3. Wrap the functions inside react components in useCallback
 4. Wrap computed values inside react components in useMemo
 5. Work on the design, especially for mobile, I don't like how close those buttons are
-6. Build up a folder of reusable ui components to avoid some of the repition (title editing forms, for example)
+6. Build up a folder of reusable ui components
 7. Add JSdocs to most of the functions
 8. Add authentication and let users manage their own personal list of roadmaps
 9. Rewrite it in Rust (just kidding, kind of)

@@ -1,4 +1,3 @@
-import { useState } from 'react'
 import { toast } from 'react-toastify'
 import { useMutation } from '@apollo/client'
 import { useRecoilState, useSetRecoilState } from 'recoil'
@@ -12,16 +11,10 @@ const Saga = ({ saga: { title, tasks, _id }, roadmapId, index }) => {
   const [deleteSaga] = useMutation(DELETE_SAGA)
   const [updateSaga] = useMutation(UPDATE_SAGA)
   const setModal = useSetRecoilState(modalState)
-  const [editOpen, setEditOpen] = useState(false)
-  const [titleEdit, setTitleEdit] = useState(title)
   const [roadmaps, setRoadmaps] = useRecoilState(roadmapsState)
   const complete = tasks.length > 0 && tasks.every((task) => task.done)
 
   const openTaskModal = () => setModal({ type: 'task', roadmapId, sagaId: _id })
-
-  const handleEdit = async () => setEditOpen((o) => !o)
-  
-  const handleEditChange = (e) => setTitleEdit(e.target.value)
 
   const thisSagasRoadmap = roadmaps.find((roadmap) =>
     roadmap.sagas.some((saga) => saga._id === _id)
@@ -36,8 +29,7 @@ const Saga = ({ saga: { title, tasks, _id }, roadmapId, index }) => {
     )
   }
 
-  const handleSubmitEdit = async (e) => {
-    e.preventDefault()
+  const handleSubmitEdit = async (titleEdit) => {
     const toastId = toast.info('Updating saga...')
     try {
       const res = await updateSaga({ variables: { _id, title: titleEdit } })
@@ -51,7 +43,6 @@ const Saga = ({ saga: { title, tasks, _id }, roadmapId, index }) => {
         render: 'Saga updated!',
         autoClose: 3000
       })
-      setEditOpen(false)
     } catch (err) {
       toast.update(toastId, {
         type: 'error',
@@ -95,14 +86,9 @@ const Saga = ({ saga: { title, tasks, _id }, roadmapId, index }) => {
         index,
         title,
         complete,
-        editOpen,
-        titleEdit,
-        handleEdit,
-        setEditOpen,
         handleDelete,
         openTaskModal,
-        handleSubmitEdit,
-        handleEditChange
+        handleSubmitEdit
       }}
     />
   )

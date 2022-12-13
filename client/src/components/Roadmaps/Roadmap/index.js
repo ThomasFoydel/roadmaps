@@ -1,5 +1,4 @@
 import { toast } from 'react-toastify'
-import { useEffect, useState } from 'react'
 import { useMutation } from '@apollo/client'
 import { useRecoilState, useSetRecoilState } from 'recoil'
 import { DELETE_ROADMAP, UPDATE_ROADMAP } from '../../../graphql/queries'
@@ -18,14 +17,10 @@ const Roadmap = () => {
   const [roadmaps, setRoadmaps] = useRecoilState(roadmapsState)
   const [updateRoadmap] = useMutation(UPDATE_ROADMAP)
   const [deleteRoadmap] = useMutation(DELETE_ROADMAP)
-  const [editOpen, setEditOpen] = useState(false)
   const setModal = useSetRecoilState(modalState)
 
   const { title, sagas, _id } =
     roadmaps.find((r) => r._id === selectedRoadmapId) || {}
-  const [titleEdit, setTitleEdit] = useState(title || '')
-
-  useEffect(() => setTitleEdit(title || ''), [title])
 
   const displayAddSaga = roadmaps.length > 0 && selectedRoadmapId
 
@@ -60,8 +55,7 @@ const Roadmap = () => {
     }
   }
 
-  const handleEditSubmit = async (e) => {
-    e.preventDefault()
+  const handleSubmitEdit = async (titleEdit) => {
     const toastId = toast.info('Updating roadmap...')
     try {
       const res = await updateRoadmap({ variables: { _id, title: titleEdit } })
@@ -83,9 +77,7 @@ const Roadmap = () => {
         autoClose: 3000
       })
     }
-    setEditOpen(false)
   }
-  const handleTitleChange = (e) => setTitleEdit(e.target.value)
 
   if (!selectedRoadmapId) return <></>
   return (
@@ -94,15 +86,11 @@ const Roadmap = () => {
         _id,
         sagas,
         title,
-        editOpen,
         complete,
-        titleEdit,
-        setEditOpen,
         handleDelete,
         openTaskModal,
         displayAddSaga,
-        handleEditSubmit,
-        handleTitleChange
+        handleSubmitEdit
       }}
     />
   )

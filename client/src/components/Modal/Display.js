@@ -15,7 +15,7 @@ const Display = ({
     from: { opacity: 0 },
     enter: { opacity: 1 },
     leave: { opacity: 0 },
-    config: { friction: 12, tension: 180 }
+    config: { friction: 20, tension: 210 }
   })
 
   const modalWindowAnimation = useSpring({

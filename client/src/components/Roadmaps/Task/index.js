@@ -1,4 +1,3 @@
-import { useState } from 'react'
 import { toast } from 'react-toastify'
 import { useMutation } from '@apollo/client'
 import { useRecoilState, useRecoilValue } from 'recoil'
@@ -10,8 +9,6 @@ import './Task.styles.scss'
 const Task = ({ task: { _id, title, done } }) => {
   const [updateTask] = useMutation(UPDATE_TASK)
   const [deleteTask] = useMutation(DELETE_TASK)
-  const [editOpen, setEditOpen] = useState(false)
-  const [titleEdit, setTitleEdit] = useState(title)
   const [roadmaps, setRoadmaps] = useRecoilState(roadmapsState)
   const selectedRoadmapId = useRecoilValue(selectedRoadmapIdState)
 
@@ -80,8 +77,7 @@ const Task = ({ task: { _id, title, done } }) => {
     }
   }
 
-  const handleEditSubmit = async (e) => {
-    e.preventDefault()
+  const handleSubmitEdit = async (titleEdit) => {
     const toastId = toast.info('Updating task...')
     try {
       const res = await updateTask({
@@ -89,7 +85,6 @@ const Task = ({ task: { _id, title, done } }) => {
       })
       const updatedTask = res?.data?.updateTask
       updateRoadmapState(updatedTask)
-      setEditOpen(false)
       toast.update(toastId, {
         type: 'success',
         render: 'Task updated!',
@@ -110,13 +105,9 @@ const Task = ({ task: { _id, title, done } }) => {
         _id,
         done,
         title,
-        editOpen,
-        titleEdit,
         toggleDone,
-        setEditOpen,
-        setTitleEdit,
         handleDelete,
-        handleEditSubmit
+        handleSubmitEdit
       }}
     />
   )

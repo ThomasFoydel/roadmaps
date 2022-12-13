@@ -5,6 +5,7 @@
   border-radius: 4px;
   display: flex;
   align-items: center;
+  height: 32px;
 
   button {
     background: none;
@@ -14,29 +15,5 @@
   .check-box {
     font-size: 1.5rem;
     color: #484cac;
-  }
-
-  h5 {
-    margin-left: 8px;
-    max-width: 140px;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-  }
-
-  .edit-form,
-  .title-section {
-    width: 100%;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    button {
-      margin-right: 8px;
-      border: none;
-      background: none;
-      &:hover {
-        color: #4c4c4c;
-      }
-    }
   }
 }
