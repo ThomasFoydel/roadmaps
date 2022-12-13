@@ -20,9 +20,18 @@
     .button-section {
       display: flex;
       align-items: center;
+
       button {
         font-size: 1.1rem !important;
         width: 1.1rem;
+        border: none;
+        background: none;
+        margin: 0 6px;
+        font-size: 1rem;
+
+        &:hover {
+          color: #4c4c4c;
+        }
       }
     }
 
@@ -85,16 +94,6 @@
     font-size: 1.5rem;
   }
 
-  button {
-    border: none;
-    background: none;
-    margin: 0 6px;
-    font-size: 1rem;
-
-    &:hover {
-      color: #4c4c4c;
-    }
-  }
   .pencil,
   .minus {
     font-size: 1rem;
