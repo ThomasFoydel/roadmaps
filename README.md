@@ -1,7 +1,7 @@
 If you're reading this:
 
 1. Please hire me lol
-2. You can find a live version of this app at http://foydelroadmaps.herokuapp.com
+2. You can find a live version of this app at https://foydelroadmaps.herokuapp.com
 3. Below you will find the instructions for running this app locally.
 
 # ROADMAPS
