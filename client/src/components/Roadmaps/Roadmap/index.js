@@ -2,6 +2,9 @@ import { toast } from 'react-toastify'
 import { useMutation } from '@apollo/client'
 import { useRecoilState, useSetRecoilState } from 'recoil'
 import { DELETE_ROADMAP, UPDATE_ROADMAP } from '../../../graphql/queries'
+import deletion from '../../../assets/audio/deletion.wav'
+import error from '../../../assets/audio/error.wav'
+import happy from '../../../assets/audio/happy.wav'
 import Display from './Display'
 import './Roadmap.styles.scss'
 import {
@@ -41,12 +44,14 @@ const Roadmap = () => {
         roadmaps.filter((roadmap) => roadmap._id !== deletedRoadmapId)
       )
       setSelectedRoadmap(null)
+      new Audio(deletion).play()
       toast.update(toastId, {
         type: 'success',
         render: 'Roadmap deleted!',
         autoClose: 3000
       })
     } catch (err) {
+      new Audio(error).play()
       toast.update(toastId, {
         type: 'error',
         render: err.message,
@@ -65,12 +70,14 @@ const Roadmap = () => {
           roadmap._id === updatedRoadmap._id ? updatedRoadmap : roadmap
         )
       )
+      new Audio(happy).play()
       toast.update(toastId, {
         type: 'success',
         render: 'Roadmap updated!',
         autoClose: 3000
       })
     } catch (err) {
+      new Audio(error).play()
       toast.update(toastId, {
         type: 'error',
         render: err.message,

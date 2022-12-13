@@ -3,6 +3,10 @@ import { useRecoilState } from 'recoil'
 import { useEffect, useState } from 'react'
 import { useMutation } from '@apollo/client'
 import { createMutations } from '../../graphql/queries'
+import shine from '../../assets/audio/shine.wav'
+import close from '../../assets/audio/close.wav'
+import happy from '../../assets/audio/happy.wav'
+import error from '../../assets/audio/error.wav'
 import {
   modalState,
   roadmapsState,
@@ -24,7 +28,10 @@ function Modal() {
   )
   const [typeText, setTypeText] = useState(type)
   useEffect(() => {
-    if (type) setTypeText(type)
+    if (type) {
+      setTypeText(type)
+      new Audio(shine).play()
+    } else new Audio(close).play()
   }, [type])
 
   const closeModal = () => {
@@ -86,9 +93,11 @@ function Modal() {
         render: `New ${type} created!`,
         autoClose: 3000
       })
+      new Audio(happy).play()
       setTitle('')
       closeModal()
     } catch (err) {
+      new Audio(error).play()
       toast.update(toastId, {
         type: 'error',
         render: err.message,

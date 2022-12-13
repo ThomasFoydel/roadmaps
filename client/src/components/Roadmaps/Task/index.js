@@ -3,6 +3,9 @@ import { useMutation } from '@apollo/client'
 import { useRecoilState, useRecoilValue } from 'recoil'
 import { roadmapsState, selectedRoadmapIdState } from '../../../recoil/atoms'
 import { DELETE_TASK, UPDATE_TASK } from '../../../graphql/queries'
+import deletion from '../../../assets/audio/deletion.wav'
+import error from '../../../assets/audio/error.wav'
+import happy from '../../../assets/audio/happy.wav'
 import Display from './Display'
 import './Task.styles.scss'
 
@@ -43,12 +46,14 @@ const Task = ({ task: { _id, title, done } }) => {
         variables: { _id, done: !done }
       })
       updateRoadmapState(res?.data?.updateTask)
+      new Audio(happy).play()
       toast.update(toastId, {
         type: 'success',
         render: 'Task updated!',
         autoClose: 3000
       })
     } catch (err) {
+      new Audio(error).play()
       toast.update(toastId, {
         type: 'error',
         render: err.message,
@@ -63,12 +68,14 @@ const Task = ({ task: { _id, title, done } }) => {
       const res = await deleteTask({ variables: { _id } })
       const deletedTaskId = res?.data?.deleteTask
       if (deletedTaskId === _id) updateRoadmapState()
+      new Audio(deletion).play()
       toast.update(toastId, {
         type: 'success',
         render: 'Task deleted!',
         autoClose: 3000
       })
     } catch (err) {
+      new Audio(error).play()
       toast.update(toastId, {
         type: 'error',
         render: err.message,
@@ -85,12 +92,14 @@ const Task = ({ task: { _id, title, done } }) => {
       })
       const updatedTask = res?.data?.updateTask
       updateRoadmapState(updatedTask)
+      new Audio(happy).play()
       toast.update(toastId, {
         type: 'success',
         render: 'Task updated!',
         autoClose: 3000
       })
     } catch (err) {
+      new Audio(error).play()
       toast.update(toastId, {
         type: 'error',
         render: err.message,

@@ -2,8 +2,11 @@ import { toast } from 'react-toastify'
 import { useMutation } from '@apollo/client'
 import { useRecoilState, useSetRecoilState } from 'recoil'
 import { DELETE_SAGA, UPDATE_SAGA } from '../../../graphql/queries'
+import deletion from '../../../assets/audio/deletion.wav'
 import { modalState } from '../../../recoil/atoms/modal'
 import { roadmapsState } from '../../../recoil/atoms'
+import error from '../../../assets/audio/error.wav'
+import happy from '../../../assets/audio/happy.wav'
 import Display from './Display'
 import './Saga.styles.scss'
 
@@ -38,12 +41,14 @@ const Saga = ({ saga: { title, tasks, _id }, roadmapId, index }) => {
         saga._id === updatedSaga._id ? updatedSaga : saga
       )
       updateSagas(sagaUpdate)
+      new Audio(happy).play()
       toast.update(toastId, {
         type: 'success',
         render: 'Saga updated!',
         autoClose: 3000
       })
     } catch (err) {
+      new Audio(error).play()
       toast.update(toastId, {
         type: 'error',
         render: err.message,
@@ -63,13 +68,14 @@ const Saga = ({ saga: { title, tasks, _id }, roadmapId, index }) => {
       )
 
       updateSagas(sagaUpdate)
-
+      new Audio(deletion).play()
       toast.update(toastId, {
         type: 'success',
         render: 'Saga deleted!',
         autoClose: 3000
       })
     } catch (err) {
+      new Audio(error).play()
       toast.update(toastId, {
         type: 'error',
         render: err.message,

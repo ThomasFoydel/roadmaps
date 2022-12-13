@@ -9,6 +9,8 @@ import {
 import { useEffect, useState } from 'react'
 import { animated, useSpring } from 'react-spring'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import shine from '../../../assets/audio/shine.wav'
+import close from '../../../assets/audio/close.wav'
 import './EditableTitle.styles.scss'
 
 const EditableTitle = ({
@@ -31,6 +33,16 @@ const EditableTitle = ({
   const handleSubmit = async (e) => {
     e.preventDefault()
     await handleSubmitEdit(titleEdit)
+    setEditOpen(false)
+  }
+
+  const openEdit = () => {
+    new Audio(shine).play()
+    setEditOpen(true)
+  }
+
+  const closeEdit = () => {
+    new Audio(close).play()
     setEditOpen(false)
   }
 
@@ -57,7 +69,7 @@ const EditableTitle = ({
               <button
                 id={`cancel-edit-${_id}`}
                 type='button'
-                onClick={() => setEditOpen(false)}>
+                onClick={closeEdit}>
                 <FontAwesomeIcon icon={faTimes} />
               </button>
               <Tooltip anchorId={`cancel-edit-${_id}`} content='Cancel edit' />
@@ -86,17 +98,14 @@ const EditableTitle = ({
                 type='button'
                 className='btn'
                 onClick={handleDelete}>
-                <FontAwesomeIcon
-                  className='minus'
-                  icon={faMinusCircle}
-                />
+                <FontAwesomeIcon className='minus' icon={faMinusCircle} />
               </button>
               <Tooltip anchorId={`remove-saga-${_id}`} content='Delete saga' />
               <button
                 id={`edit-saga-${_id}`}
                 type='button'
                 className='btn'
-                onClick={() => setEditOpen(true)}>
+                onClick={openEdit}>
                 <FontAwesomeIcon className='pencil' icon={faPencil} />
               </button>
               <Tooltip anchorId={`edit-saga-${_id}`} content='Edit saga' />
