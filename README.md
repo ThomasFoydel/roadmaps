@@ -10,7 +10,7 @@ If you're reading this:
 
 1. Download and unzip or clone this repository
 2. Add a .env file in the root of the project
-3. Add a `MONGO_URI` variable to that .env file (probably use the one I sent when I emailed you the link to this repo, or you can use your own mongoDB atlast uri if you have one)
+3. Add a `MONGO_URI` variable to that .env file (probably use the one I sent when I emailed you the link to this repo, or you can use your own mongoDB atlas uri if you have one)
 4. From the root of the project, run the command `npm run install-all`
 5. Once installation is complete, run the command `npm run dev`
 6. The last command should open the front end in your default browser, you can now explore it.
