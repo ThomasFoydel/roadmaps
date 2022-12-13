@@ -46,7 +46,7 @@ const Task = ({ task: { _id, title, done } }) => {
         variables: { _id, done: !done }
       })
       updateRoadmapState(res?.data?.updateTask)
-      new Audio(happy).play()
+      new Audio(res?.data?.updateTask?.done ? happy : deletion).play()
       toast.update(toastId, {
         type: 'success',
         render: 'Task updated!',
